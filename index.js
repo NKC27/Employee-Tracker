@@ -103,7 +103,7 @@ function addRole() {
     ])
     .then(function (answer) {
 
-      connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answer.roleNameAdd, answer.salary, answer.departmentId], function(err, res) {
+      connection.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [answer.roleNameAdd, answer.salary, answer.departmentId], function (err, res) {
         if (err) throw err;
         console.table(res);
         startMenu();
@@ -113,8 +113,7 @@ function addRole() {
 
 function addEmployee() {
   inquirer
-    .prompt([
-      {
+    .prompt([{
         type: "input",
         message: "What's the first name of the employee?",
         name: "employeeFirstName"
@@ -135,9 +134,9 @@ function addEmployee() {
         name: "managerID"
       }
     ])
-    .then(function(answer) {
+    .then(function (answer) {
 
-      connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.employeeFirstName, answer.employeeLastName, answer.roleID, answer.managerID], function(err, res) {
+      connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)", [answer.employeeFirstName, answer.employeeLastName, answer.roleID, answer.managerID], function (err, res) {
         if (err) throw err;
         console.table(res);
         startMenu();
@@ -147,8 +146,7 @@ function addEmployee() {
 
 function updateEmployee() {
   inquirer
-    .prompt([
-      {
+    .prompt([{
         type: "input",
         message: "Which employee would you like to update?",
         name: "employeeUpdate"
@@ -159,28 +157,30 @@ function updateEmployee() {
         name: "updateRole"
       }
     ])
-    .then(function(answer) {
-      connection.query('UPDATE employee SET role_id=? WHERE first_name= ?',[answer.updateRole, answer.employeeUpdate],function(err, res) {
+    .then(function (answer) {
+      connection.query('UPDATE employee SET role_id=? WHERE first_name= ?', [answer.updateRole, answer.employeeUpdate], function (err, res) {
         if (err) throw err;
         console.table(res);
         startMenu();
       });
     });
 }
+
 function viewDepartment() {
   // select from the db
   let query = "SELECT * FROM department";
-  connection.query(query, function(err, res) {
+  connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
     startMenu();
   });
-  
+
 }
+
 function viewRoles() {
   // select from the database employee_db
   let query = "SELECT * FROM role";
-  connection.query(query, function(err, res) {
+  connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
     startMenu();
@@ -191,13 +191,13 @@ function viewRoles() {
 function viewEmployees() {
   // select from the database employee_db
   let query = "SELECT * FROM employee";
-  connection.query(query, function(err, res) {
+  connection.query(query, function (err, res) {
     if (err) throw err;
     console.table(res);
     startMenu();
   });
 }
-  
+
 function quit() {
   connection.end();
   process.exit();
