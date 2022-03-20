@@ -11,11 +11,22 @@ const connection = mysql.createConnection({
 
 connection.connect(function (err) {
   if (err) throw err;
-  console.log("You are now connected");
+  console.log("You are now connected to the database");
 
   startMenu();
 
 });
+
+const logoCli = require('cli-logo'),
+    version = 'v' + require('./package.json').version,
+    description = require('./package.json').description;
+    logoConfig = {
+        "name": "* Employee Tracker *",
+        "description": description,
+        "version": version
+    };
+ 
+logoCli.print(logoConfig);
 
 function startMenu() {
   inquirer
